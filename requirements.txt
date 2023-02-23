@@ -1,0 +1,26 @@
+# Install pre-built wheels for PyTorch Geometric that are compatible with
+# poptorch which is currently pinned to torch 1.13.0
+--find-links https://data.pyg.org/whl/torch-1.13.0+cpu.html
+
+torch-scatter
+torch-cluster
+torch-sparse
+pyg-nightly==2.3.0.dev20230227
+
+black
+flake8
+flake8-copyright
+isort
+jsonargparse[all]
+jupyter
+lovely-tensors
+periodictable
+pre-commit
+py-spy
+py3dmol
+pytest
+pytest-benchmark
+pytest-cov
+seaborn
+tabulate
+wandb

@@ -1,0 +1,78 @@
+# qm9, hydronet, hydronet_medium, or hydronet_small (type: BenchDataset, default: qm9)
+dataset: qm9
+
+# Apply graph packing to the dataset. (type: bool, default: True)
+use_packing: true
+
+# Use synthetic data on the device to disable I/O. (type: bool, default: False)
+synthetic_data: false
+
+# the AMP budget used for planning ops. (type: Union[float, null], default: null)
+available_memory_proportion:
+
+# CombinedBatch(model_batch_size: int, device_iterations: int = 1, replication_factor: int = 1, gradient_accumulation: int = 1)
+combined_batch:
+
+  #   (type: int, default: 16)
+  model_batch_size: 16
+
+  #   (type: int, default: 1)
+  device_iterations: 4
+
+  #   (type: int, default: 16)
+  replication_factor: 16
+
+  #   (type: int, default: 8)
+  gradient_accumulation: 2
+
+# ModelParams(num_features: int = 100, num_interactions: int = 4, num_gaussians: int = 25, cutoff: float = 6.0)
+model_params:
+
+  #   (type: int, default: 100)
+  num_features: 100
+
+  #   (type: int, default: 4)
+  num_interactions: 4
+
+  #   (type: int, default: 25)
+  num_gaussians: 25
+
+  #   (type: float, default: 6.0)
+  cutoff: 6.0
+
+# module to benchmark, schnet, schnet_fss, or interaction (type: BenchModule, default: schnet_fss)
+module: schnet_fss
+
+# The learning rate used by the optimiser. (type: float, default: 0.001)
+learning_rate: 0.001
+
+# The number of epochs to benchmark. (type: int, default: 25)
+num_epochs: 25
+
+# Run a single training step with profiling enabled and
+# saves the profiling report to the provided location. (type: Union[str, null], default: null)
+profile_dir:
+
+# The depth of the buffer used for prefetching batches from the host. (type: int, default: 3)
+prefetch_depth: 3
+
+# the number of tiles used with overlapped IO. (type: Union[int, null], default: 0)
+num_io_tiles: 0
+
+# the benchmark task to run. (type: Task, default: train)
+task: train
+
+# the random seed to use. (type: int, default: 0)
+seed: 0
+
+# the maximum number of data loader workers to use. (type: int, default: 32)
+max_workers: 32
+
+# Enables poptorch.DataLoaderMode.Async (type: bool, default: True)
+use_async_loader: true
+
+# Enables PopART merging of all reduce collectives (type: bool, default: True)
+merge_all_reduce: true
+
+# Use Weights and Biases to log benchmark results. (type: bool, default: True)
+use_wandb: true

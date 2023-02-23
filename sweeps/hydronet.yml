@@ -1,0 +1,26 @@
+method: grid
+parameters:
+  combined_batch:
+    values:
+      # - {model_batch_size: 7, gradient_accumulation: 32, replication_factor: 1, device_iterations: 64}
+      # - {model_batch_size: 7, gradient_accumulation: 32, replication_factor: 2, device_iterations: 32}
+      # - {model_batch_size: 7, gradient_accumulation: 32, replication_factor: 4, device_iterations: 16}
+      - {model_batch_size: 7, gradient_accumulation: 32, replication_factor: 8, device_iterations: }
+      - {model_batch_size: 7, gradient_accumulation: 32, replication_factor: 16, device_iterations: 4}
+      - {model_batch_size: 7, gradient_accumulation: 32, replication_factor: 32, device_iterations: 2}
+      - {model_batch_size: 7, gradient_accumulation: 32, replication_factor: 64, device_iterations: 1}
+
+
+program: bench.py
+
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - "--config"
+  - "./configs/hydronet_medium.yml"
+  - "--dataset"
+  - "hydronet"
+  - "--use_packing"
+  - "False"
+  - ${args}

@@ -1,0 +1,22 @@
+method: grid
+parameters:
+  model_params.num_features:
+    values: [64, 128, 256, 512]
+  model_params.num_interactions:
+    values: [2, 4, 6]
+
+
+
+program: bench.py
+
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - "--config"
+  - "./configs/hydronet_packed.yml"
+  - "--dataset"
+  - "hydronet"
+  - "--combined_batch.model_batch_size=1"
+  - "--combined_batch.gradient_accumulation=64"
+  - ${args}

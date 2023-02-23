@@ -1,0 +1,23 @@
+method: grid
+parameters:
+  config:
+    values:
+      - {use_packing: false, module: schnet, prefetch_depth: 0, use_async_loader: false, merge_all_reduce: false}
+      - {use_packing: true, module: schnet, prefetch_depth: 0, use_async_loader: false, merge_all_reduce: false}
+      - {use_packing: true, module: schnet, prefetch_depth: 0, use_async_loader: true, merge_all_reduce: false}
+      - {use_packing: true, module: schnet_fss, prefetch_depth: 0, use_async_loader: true, merge_all_reduce: true}
+      - {use_packing: true, module: schnet_fss, prefetch_depth: 4, use_async_loader: true, merge_all_reduce: true}
+
+
+
+program: bench.py
+
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - "--config"
+  - "./configs/hydronet_packed.yml"
+  - "--dataset"
+  - "hydronet"
+  - ${args}

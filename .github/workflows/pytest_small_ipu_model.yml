@@ -1,0 +1,31 @@
+name: pytest small IPU model
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  pytest-container:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    container:
+      image:  graphcore/pytorch:3.1.0-ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install requirements
+        run: |
+          python3 -m pip install -r requirements.txt
+          python3 -m pip install .
+
+      - name: Log installed environment
+        run: |
+          python3 -m pip freeze
+          python3 -c "import poptorch; print(poptorch.__version__)"
+
+      - name: Run pytest on small IPU model
+        env:
+          POPTORCH_SMALL_IPU_MODEL: 1
+        run: |
+          pytest
