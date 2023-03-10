@@ -9,14 +9,11 @@ import pandas as pd
 import poptorch
 import torch
 from jsonargparse import CLI
-from torch_geometric.nn import Aggregation
 from torch_geometric.nn.models.schnet import GaussianSmearing, InteractionBlock
 from torch_scatter import scatter
 from tqdm import trange
 
 from .model import FastShiftedSoftplus
-
-Aggregation.set_validate_args(False)
 
 try:
     import wandb
